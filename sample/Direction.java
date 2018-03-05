@@ -1,7 +1,5 @@
-
-
 public enum Direction {
-
+	
 	NORTH("north"),
 	NORTHEAST("northeast"),
 	EAST("east"),
@@ -13,12 +11,11 @@ public enum Direction {
 	
 	private String name = null;
 	
-	private Direction(String s){
+	private Direction(String s) {
 		name = s;
 	}
+	
 	public String getName() {
 		return name;
 	}
-
-
 }
