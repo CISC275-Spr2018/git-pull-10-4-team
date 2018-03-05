@@ -7,3 +7,6 @@
  * use proper images for direction
  * load images for all direction (an image should only be loaded once!!! why?)
  **/
+
+public class View {
+}

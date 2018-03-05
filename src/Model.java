@@ -8,3 +8,6 @@
  * provide direction
  * provide location
  **/
+
+public class Model {
+}
