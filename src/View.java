@@ -14,7 +14,6 @@ import java.io.IOException;
  * use proper images for direction
  * load images for all direction (an image should only be loaded once!!! why?)
  **/
-
 public class View extends JPanel {
 	private final static int frameWidth = 500;
 	private final static int frameHeight = 300;
@@ -24,6 +23,13 @@ public class View extends JPanel {
 	private static int frameNum = 0;
 	private static int imgNum = 0;
 	private static BufferedImage[][] pics;
+	
+	private int xLocation;
+	private int yLocation;
+	private boolean north;
+	private boolean south;
+	private boolean east;
+	private boolean west;
 	
 	public int getImageHeight() {
 		return imageHeight;
@@ -42,18 +48,9 @@ public class View extends JPanel {
 	}
 	
 	/**
-	 * Override this JPanel's paint method to cycle through picture array and draw images
-	 *
-	 * @param g
-	 */
-	public void paint(Graphics g) {
-		drawOrc(g);
-	}
-	
-	/**
 	 * Get image, segment and store in array
 	 */
-	public static void animate() {
+	View() {
 		final BufferedImage[] imgs = {
 				//TODO: figure out how to add all images via enum, including ones with different frame counts/sizes/layouts
 				Images.ORC_FW_N.getImage(),
@@ -69,52 +66,63 @@ public class View extends JPanel {
 		pics = new BufferedImage[imgs.length][frameCount];
 		
 		for (int i = 0; i < imgs.length; i++) {
-			for (int f = 0; f < frameCount; f++)
+			for (int f = 0; f < frameCount; f++) {
 				pics[i][f] = imgs[i].getSubimage(imageWidth * f, 0, imageWidth, imageHeight);
+			}
 		}
-		// DONE: Change this constructor so that at least eight orc animation pngs are loaded
 	}
 	
 	/**
 	 * Draws the orc, reads location information
 	 *
-	 * @param g
 	 * @return
 	 */
-	public Graphics drawOrc(Graphics g) {
+	public void update(int x, int y, boolean[] direct) {
+		xLocation = x;
+		yLocation = y;
+		north = direct[0];
+		south = direct[1];
+		east = direct[2];
+		west = direct[3];
+	}
+	
+	/**
+	 * Override this JPanel's paint method to cycle through picture array and draw images
+	 *
+	 * @param g
+	 */
+	public void paint(Graphics g) {
 		//TODO: figure out how to reference images by enum instead of an index if that's a thing, because using words would be nicer than using numbers that mean nothing in context.
 		frameNum = (frameNum + 1) % frameCount;
 		
-		if (Model.moveNorth) {
+		if (north) {
 			imgNum = 0;
 		}
-		if (Model.moveSouth) {
+		if (south) {
 			imgNum = 1;
 		}
-		if (Model.moveEast) {
+		if (east) {
 			imgNum = 2;
 		}
-		if (Model.moveWest) {
+		if (west) {
 			imgNum = 3;
 		}
-		if (Model.moveNorth && Model.moveEast) {
+		if (north && east) {
 			imgNum = 4;
 		}
-		if (Model.moveNorth && Model.moveWest) {
+		if (north && west) {
 			imgNum = 5;
 		}
-		if (Model.moveSouth && Model.moveEast) {
+		if (south && east) {
 			imgNum = 6;
 		}
-		if (Model.moveSouth && Model.moveWest) {
+		if (south && west) {
 			imgNum = 7;
 		}
-		g.drawImage(pics[imgNum][frameNum], Model.x, Model.y, Color.gray, this);
+		g.drawImage(pics[imgNum][frameNum], xLocation, yLocation, Color.gray, this);
 		
 		// DONE: Keep the orc from walking off-screen, turn around when bouncing off walls.
 		// Be sure that animation picture direction matches what is happening on screen.
-		
-		return g;
 	}
 	
 	/**

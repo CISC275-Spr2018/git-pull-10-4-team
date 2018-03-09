@@ -9,16 +9,47 @@
  * provide location
  **/
 
-public class Model {
-	public final static int xIncr = 8;
-	public final static int yIncr = 2;
-	public static boolean moveNorth = false;
-	public static boolean moveSouth = true;
-	public static boolean moveEast = true;
-	public static boolean moveWest = false;
-	public static int x = 0;
-	public static int y = 0;
-	public boolean direct;
+class Model {
+	private static int worldWidth;
+	private static int worldHeight;
+	private static int characterWidth;
+	private static int characterHeight;
+	
+	private static int x = 0;
+	private static int y = 0;
+	
+	private final static int xIncr = 8;
+	private final static int yIncr = 2;
+	
+	private static boolean moveNorth = false;
+	private static boolean moveSouth = true;
+	private static boolean moveEast = true;
+	private static boolean moveWest = false;
+	private boolean direct[] = {moveNorth, moveSouth, moveEast, moveWest};
+	
+	public Model(int width, int height, int imageWidth, int imageHeight) {
+		worldWidth = width;
+		worldHeight = height;
+		characterWidth = imageWidth;
+		characterHeight = imageHeight;
+	}
+	
+	
+	public int getY() {
+		return y;
+	}
+	
+	public int getX() {
+		return x;
+	}
+	
+	/**
+	 * Calls all the model methods
+	 */
+	public void updateLocationAndDirection() {
+		handleOrc();
+		moveOrc();
+	}
 	
 	/**
 	 * Reads from movement booleans to change the position of the orc
@@ -54,7 +85,7 @@ public class Model {
 			moveEast = true;
 			moveWest = false;
 		}
-		if (x > View.getFrameWidth() - View.getFrameHeight()) {
+		if (x > worldWidth - characterWidth) {
 			System.out.println("Hit east wall");
 			moveWest = true;
 			moveEast = false;
@@ -64,27 +95,14 @@ public class Model {
 			moveSouth = true;
 			moveNorth = false;
 		}
-		if (y > View.getFrameHeight() - View.getFrameWidth()) {
+		if (y > worldHeight - characterHeight) {
 			System.out.println("Hit south wall");
 			moveNorth = true;
 			moveSouth = false;
 		}
 	}
 	
-	private int getY() {
-		return y;
-	}
-	
-	private int getX() {
-		return x;
-	}
-	
-	public void updateLocationAndDirection() {
-		handleOrc();
-		moveOrc();
-	}
-	
-	private boolean getDirect() {
+	public boolean[] getDirect() {
 		return direct;
 	}
 }
