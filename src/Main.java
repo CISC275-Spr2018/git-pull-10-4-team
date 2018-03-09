@@ -9,14 +9,15 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		frame.getContentPane().add(new Controller());
+		Controller controller = new Controller();
+		frame.getContentPane().add(controller.getView());
 		frame.setBackground(Color.gray);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(View.getFrameWidth(), View.getFrameHeight());
 		frame.setVisible(true);
-		Model myModel = new Model();
+		//controller.start();
 		for (int i = 0; i < 1000; i++) {
-			myModel.updateLocationAndDirection();
+			controller.getModel().updateLocationAndDirection();
 			frame.repaint();
 			try {
 				Thread.sleep(100);
