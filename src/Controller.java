@@ -8,10 +8,10 @@ public class Controller {
 	
 	public Controller() {
 		view = new View();
-		model = new Model(view.getWidth(), view.getHeight()), view.getImageWidth(), view.getImageHeight());
+		model = new Model(view.getWidth(), view.getHeight(), view.getImageWidth(), view.getImageHeight());
 	}
 	
-	// run the simulation
+	//run the simulation
 	public void start() {
 		for (int i = 0; i < 5000; i++) {
 			//increment the x and y coordinates, alter direction if necessary
