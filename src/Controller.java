@@ -23,8 +23,11 @@ public class Controller implements ActionListener{
 			public void keyPressed(KeyEvent e) {
 				if(!pressed) {
 					pressed = true;
-					currentKey = e.getKeyCode();
 					model.changeDirection(e.getKeyCode()); // what happens when a key is released
+					if(!updater.isRunning() && e.getKeyCode() != currentKey) {
+						view.update(model.getX(), model.getY(), model.getDirect());
+					}
+					currentKey = e.getKeyCode();
 				}
 			}
 
