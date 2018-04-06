@@ -1,7 +1,11 @@
 import javax.swing.JPanel;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.awt.image.BufferedImage;
 import java.awt.Graphics;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.HashMap;
 
@@ -30,20 +34,55 @@ public class View extends JPanel {
     private int curX;
     private int curY;
     private Direction curDirect;
-
+    
+    //start stop button and JPanel
+    JButton startStopButton;
+    JPanel buttonPanel;
+    
     public View() {
+    	
+        //create a JPanel with a start/stop button on it
+        initButton();
+    	
         //create JFrame and add this to it
-        initJFrame();
+        initJFrame();        
     }
 
     private void initJFrame() {
         frame = new JFrame();
+        frame.getContentPane().add(buttonPanel, BorderLayout.NORTH); //add the JPanel with the button
         frame.getContentPane().add(this);
-        frame.setBackground(Color.gray);
+        frame.getContentPane().setBackground(Color.gray);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(frameWidth, frameHeight);
         frame.setVisible(true);
+      
     }
+    
+    //Create the button and its own JPanel to hold it
+    private void initButton() {
+    	buttonPanel = new JPanel();
+    	startStopButton = new JButton("Stop");
+    	startStopButton.setMnemonic(KeyEvent.VK_S);
+    	startStopButton.setToolTipText("Click to start/stop the animation");
+    	buttonPanel.add(startStopButton);
+    	buttonPanel.setBackground(Color.gray);
+    }
+    
+    // For the controller to add its ActionListner to the button
+    public void setButtonListener(ActionListener l) {
+    	startStopButton.addActionListener(l);
+    }
+    
+    // change the button text based on whether the animation is running or not
+    public void updateButton(boolean running) {
+    	if (running) {
+    		startStopButton.setText("Stop");
+    	} else {
+    		startStopButton.setText("Start");
+    	}
+    }
+    
 
     public void update(double x, double y, Direction direct) {
         curX = (int) x;
@@ -80,4 +119,6 @@ public class View extends JPanel {
                     Color.gray,
                     this);
     }
+
+
 }
