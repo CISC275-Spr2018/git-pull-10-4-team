@@ -18,16 +18,20 @@ public class Controller implements ActionListener{
 		view.setKeyListener(new KeyListener() {	// add this as a key listener to the view
 			boolean pressed = false;
 			int currentKey;
+			int lastKey;
 			
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(!pressed) {
 					pressed = true;
-					model.changeDirection(e.getKeyCode()); // what happens when a key is released
-					if(!updater.isRunning() && e.getKeyCode() != currentKey) {
-						view.update(model.getX(), model.getY(), model.getDirect());
-					}
 					currentKey = e.getKeyCode();
+					model.changeDirection(e.getKeyCode()); // what happens when a key is released
+					if(!updater.isRunning() && e.getKeyCode() != lastKey) {
+						view.update(model.getX(), model.getY(), model.getDirect());
+						lastKey = e.getKeyCode();
+					} else if (updater.isRunning()) {
+						lastKey = 0;
+					}
 				}
 			}
 
