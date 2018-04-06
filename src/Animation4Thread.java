@@ -49,7 +49,7 @@ public class Animation4Thread extends JFrame {
 		pack();
 	}
 	
-	@SuppressWarnings("serial")
+	//@SuppressWarnings("serial")
 	private class DrawPanel extends JPanel {
 		int picNum = 0;
 		

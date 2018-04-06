@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
@@ -8,12 +9,18 @@ public class Controller {
 	
 	private Model model;
 	private View view;
-	private Action updateAction;
-	
+	private Timer updater;
+
 	public Controller() {
 		view = new View();
 		model = new Model(view.getWidth(), view.getHeight(), view.getImageWidth(), view.getImageHeight());
-		updateAction = new AbstractAction() {
+
+		initTimer();
+	}
+
+	private void initTimer(){
+		//define what the timer should do on each tick
+		Action updateAction = new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//increment the x and y coordinates, alter direction if necessary
@@ -22,11 +29,18 @@ public class Controller {
 				view.update(model.getX(), model.getY(), model.getDirect());
 			}
 		};
+
+		//create the actual timer
+		updater = new Timer(30, updateAction);
 	}
 	
 	//run the simulation
 	public void start() {
-		Timer timer = new Timer(30, updateAction);
-		timer.start();
+        EventQueue.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				updater.start();
+			}
+		});
 	}
 }

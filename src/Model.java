@@ -20,7 +20,7 @@ public class Model extends Rectangle{
     public Model (int width, int height, int imageWidth, int imageHeight) {
         super(imageWidth, imageHeight);
         bounds = new Rectangle(width, height);
-        direct = new Direction();
+        direct = new Direction(dx, dy);
     }
 
     public Direction getDirect() {

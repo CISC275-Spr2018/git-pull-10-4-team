@@ -16,7 +16,7 @@ public enum Sprite {
     BufferedImage[] pics;
 
     final static String IMAGE_DIR = "images/orc/";
-    final static String PREFIX = "orc_forward_";
+    final static String PREFIX = "ORC_FORWARD_";
     final static String IMAGE_TYPE = ".png";
 
     final static int frameWidth = 165;
