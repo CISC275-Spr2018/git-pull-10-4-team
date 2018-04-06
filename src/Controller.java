@@ -2,9 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-/**
- * Do not modify this file without permission from your TA.
- **/
 public class Controller {
 	
 	private Model model;
@@ -13,7 +10,7 @@ public class Controller {
 
 	public Controller() {
 		view = new View();
-		model = new Model(view.getWidth(), view.getHeight(), view.getImageWidth(), view.getImageHeight());
+		model = new Model(view.getWidth(), view.getHeight(), View.getImageWidth(), View.getImageHeight());
 
 		initTimer();
 	}
