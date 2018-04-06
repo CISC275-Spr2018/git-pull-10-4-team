@@ -56,13 +56,13 @@ public class Model extends Rectangle{
     // How to handle key presses
     public void changeDirection(int e) {
     	String curDir = direct.getName();
-    	if(e == KeyEvent.VK_Q && curDir != "NORTHWEST") {
+    	if(e == KeyEvent.VK_Q && !curDir.equals("NORTHWEST")) {
     		direct.setDirection(-1, -1);
-		} else if (e == KeyEvent.VK_W && curDir != "NORTHEAST") {
+		} else if (e == KeyEvent.VK_W && !curDir.equals("NORTHEAST")) {
 			direct.setDirection(1, -1);
-		} else if (e == KeyEvent.VK_A && curDir != "SOUTHWEST") {
+		} else if (e == KeyEvent.VK_A && !curDir.equals("SOUTHWEST")) {
 			direct.setDirection(-1, 1);
-		} else if (e == KeyEvent.VK_S && curDir != "SOUTHEAST") {
+		} else if (e == KeyEvent.VK_S && !curDir.equals("SOUTHEAST")) {
 			direct.setDirection(1, 1);
 		}
     }

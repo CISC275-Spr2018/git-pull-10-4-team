@@ -9,8 +9,7 @@ public class Direction {
     }
 
     public Direction(int dx, int dy){
-        vertical = Integer.signum(dy);
-        horizontal = Integer.signum(dx);
+        setDirection(dx, dy);
     }
 
     public void toggleVertical(){
