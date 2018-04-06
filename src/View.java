@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.HashMap;
@@ -33,7 +34,7 @@ public class View extends JPanel {
     //cached from last update call
     private int curX;
     private int curY;
-    private Direction curDirect;
+    private Direction curDirect = new Direction();
     
     //start stop button and JPanel
     JButton startStopButton;
@@ -55,8 +56,7 @@ public class View extends JPanel {
         frame.getContentPane().setBackground(Color.gray);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(frameWidth, frameHeight);
-        frame.setVisible(true);
-      
+        frame.setVisible(true);      
     }
     
     //Create the button and its own JPanel to hold it
@@ -72,6 +72,12 @@ public class View extends JPanel {
     // For the controller to add its ActionListner to the button
     public void setButtonListener(ActionListener l) {
     	startStopButton.addActionListener(l);
+    }
+    
+    // For the controller to add its KeyListener to the view
+    public void setKeyListener(KeyListener k) {
+    	frame.requestFocus();
+    	frame.addKeyListener(k);
     }
     
     // change the button text based on whether the animation is running or not
@@ -119,6 +125,5 @@ public class View extends JPanel {
                     Color.gray,
                     this);
     }
-
 
 }

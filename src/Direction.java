@@ -28,6 +28,12 @@ public class Direction {
     public int getHorizontalSign(){
         return horizontal;
     }
+    
+    // Model can set the direction
+    public void setDirection(int dx, int dy) {
+    	vertical = Integer.signum(dy);
+    	horizontal = Integer.signum(dx);
+    }
 
     public String getName(){
         String name = "";

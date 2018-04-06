@@ -1,4 +1,5 @@
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 
 /**
  * Model: Contains all the state and logic
@@ -50,5 +51,19 @@ public class Model extends Rectangle{
             //...and reverse horizontal direction if we're offscreen
             direct.toggleHorizontal();
         }
+    }
+    
+    // How to handle key presses
+    public void changeDirection(int e) {
+    	String curDir = direct.getName();
+    	if(e == KeyEvent.VK_Q && curDir != "NORTHWEST") {
+    		direct.setDirection(-1, -1);
+		} else if (e == KeyEvent.VK_W && curDir != "NORTHEAST") {
+			direct.setDirection(1, -1);
+		} else if (e == KeyEvent.VK_A && curDir != "SOUTHWEST") {
+			direct.setDirection(-1, 1);
+		} else if (e == KeyEvent.VK_S && curDir != "SOUTHEAST") {
+			direct.setDirection(1, 1);
+		}
     }
 }

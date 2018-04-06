@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class Controller implements ActionListener{
 	
@@ -13,6 +15,19 @@ public class Controller implements ActionListener{
 		view = new View();
 		model = new Model(view.getWidth(), view.getHeight(), View.getImageWidth(), View.getImageHeight());
 		view.setButtonListener(this); //add this as a listener to the button in view
+		view.setKeyListener(new KeyListener() {	// add this as a key listener to the view
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				model.changeDirection(e.getKeyCode()); // what happens when a key is released
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}});
 
 		initTimer();
 	}
