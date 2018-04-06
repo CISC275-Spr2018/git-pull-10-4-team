@@ -53,17 +53,24 @@ public class Model extends Rectangle{
         }
     }
     
+    private boolean checkBounds() {
+    	return (! bounds.contains(getMinX(), getCenterY()) || ! bounds.contains(getMaxX(), getCenterY())) || 
+    			(! bounds.contains(getCenterX(), getMinY())|| ! bounds.contains(getCenterX(), getMaxY()));
+    }
+    
     // How to handle key presses
     public void changeDirection(int e) {
-    	String curDir = direct.getName();
-    	if(e == KeyEvent.VK_Q && !curDir.equals("NORTHWEST")) {
-    		direct.setDirection(-1, -1);
-		} else if (e == KeyEvent.VK_W && !curDir.equals("NORTHEAST")) {
-			direct.setDirection(1, -1);
-		} else if (e == KeyEvent.VK_A && !curDir.equals("SOUTHWEST")) {
-			direct.setDirection(-1, 1);
-		} else if (e == KeyEvent.VK_S && !curDir.equals("SOUTHEAST")) {
-			direct.setDirection(1, 1);
-		}
+    	if (!checkBounds()) {
+    		String curDir = direct.getName();
+    		if(e == KeyEvent.VK_Q && !curDir.equals("NORTHWEST")) {
+    			direct.setDirection(-1, -1);
+    		} else if (e == KeyEvent.VK_W && !curDir.equals("NORTHEAST")) {
+    			direct.setDirection(1, -1);
+    		} else if (e == KeyEvent.VK_A && !curDir.equals("SOUTHWEST")) {
+    			direct.setDirection(-1, 1);
+    		} else if (e == KeyEvent.VK_S && !curDir.equals("SOUTHEAST")) {
+    			direct.setDirection(1, 1);
+    		}
+    	}
     }
 }

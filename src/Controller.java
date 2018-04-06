@@ -16,13 +16,23 @@ public class Controller implements ActionListener{
 		model = new Model(view.getWidth(), view.getHeight(), View.getImageWidth(), View.getImageHeight());
 		view.setButtonListener(this); //add this as a listener to the button in view
 		view.setKeyListener(new KeyListener() {	// add this as a key listener to the view
+			boolean pressed = false;
+			int currentKey;
+			
 			@Override
 			public void keyPressed(KeyEvent e) {
+				if(!pressed) {
+					pressed = true;
+					currentKey = e.getKeyCode();
+					model.changeDirection(e.getKeyCode()); // what happens when a key is released
+				}
 			}
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				model.changeDirection(e.getKeyCode()); // what happens when a key is released
+				if (e.getKeyCode() == currentKey){
+					pressed = false;
+				}
 			}
 
 			@Override
