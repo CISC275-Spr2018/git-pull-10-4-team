@@ -67,6 +67,8 @@ public class View extends JPanel {
     	startStopButton.setToolTipText("Click to start/stop the animation");
     	buttonPanel.add(startStopButton);
     	buttonPanel.setBackground(Color.gray);
+    	buttonPanel.setFocusable(false);
+    	startStopButton.setFocusable(false);
     }
     
     // For the controller to add its ActionListner to the button
