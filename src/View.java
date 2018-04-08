@@ -98,11 +98,6 @@ public class View extends JPanel {
         curDirect = direct;
 
         frame.repaint();
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     public static int getImageWidth(){

@@ -15,36 +15,7 @@ public class Controller implements ActionListener{
 		view = new View();
 		model = new Model(view.getWidth(), view.getHeight(), View.getImageWidth(), View.getImageHeight());
 		view.setButtonListener(this); //add this as a listener to the button in view
-		view.setKeyListener(new KeyListener() {	// add this as a key listener to the view
-			boolean pressed = false;
-			int currentKey;
-			int lastKey;
-			
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if(!pressed) {
-					pressed = true;
-					currentKey = e.getKeyCode();
-					model.changeDirection(e.getKeyCode()); // what happens when a key is released
-					if(!updater.isRunning() && e.getKeyCode() != lastKey) {
-						view.update(model.getX(), model.getY(), model.getDirect());
-						lastKey = e.getKeyCode();
-					} else if (updater.isRunning()) {
-						lastKey = 0;
-					}
-				}
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if (e.getKeyCode() == currentKey){
-					pressed = false;
-				}
-			}
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-			}});
+		view.setKeyListener(new DirectionKeyListener());
 
 		initTimer();
 	}
@@ -62,7 +33,7 @@ public class Controller implements ActionListener{
 		};
 
 		//create the actual timer
-		updater = new Timer(30, updateAction);
+		updater = new Timer(50, updateAction);
 		
 	}
 	
@@ -86,6 +57,39 @@ public class Controller implements ActionListener{
 				updater.start();
 			}
 		});
+	}
+
+	// add an instance of this as a key listener to the view
+	private class DirectionKeyListener implements KeyListener {
+		boolean pressed = false;
+		int currentKey;
+		int lastKey;
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if(!pressed) {
+                pressed = true;
+                currentKey = e.getKeyCode();
+                model.changeDirection(currentKey); // what happens when a key is released
+                if(!updater.isRunning() && currentKey != lastKey) {
+                    view.update(model.getX(), model.getY(), model.getDirect());
+                    lastKey = e.getKeyCode();
+                } else if (updater.isRunning()) {
+                    lastKey = 0;
+                }
+            }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            if (e.getKeyCode() == currentKey){
+                pressed = false;
+            }
+        }
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+        }
 	}
 
 	
