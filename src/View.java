@@ -34,7 +34,7 @@ public class View extends JPanel {
     //cached from last update call
     private int curX;
     private int curY;
-    private Direction curDirect = new Direction();
+    private Sprite curSprite = Sprite.getSprite(new Direction());
     
     //start stop button and JPanel
     JButton startStopButton;
@@ -92,10 +92,16 @@ public class View extends JPanel {
     }
     
 
-    public void update(double x, double y, Direction direct) {
+    public void updateLocation(double x, double y) {
         curX = (int) x;
         curY = (int) y;
-        curDirect = direct;
+
+        frame.repaint();
+        imageNum = (imageNum + 1) % curSprite.getNumImages();
+    }
+
+    public void updateDirection(Direction direct) {
+        curSprite = Sprite.getSprite(direct);
 
         frame.repaint();
     }
@@ -109,8 +115,6 @@ public class View extends JPanel {
     }
 
     private BufferedImage getImage() {
-        Sprite curSprite = Sprite.getSprite(curDirect);
-        imageNum = (imageNum + 1) % curSprite.getNumImages();
         return curSprite.getImage(imageNum);
     }
 

@@ -28,7 +28,8 @@ public class Controller implements ActionListener{
 				//increment the x and y coordinates, alter direction if necessary
 				model.updateLocationAndDirection();
 				//update the view
-				view.update(model.getX(), model.getY(), model.getDirect());
+				view.updateDirection(model.getDirect());
+				view.updateLocation(model.getX(), model.getY());
 			}
 		};
 
@@ -72,7 +73,7 @@ public class Controller implements ActionListener{
                 currentKey = e.getKeyCode();
                 model.changeDirection(currentKey); // what happens when a key is released
                 if(!updater.isRunning() && currentKey != lastKey) {
-                    view.update(model.getX(), model.getY(), model.getDirect());
+                    view.updateDirection(model.getDirect());
                     lastKey = e.getKeyCode();
                 } else if (updater.isRunning()) {
                     lastKey = 0;
