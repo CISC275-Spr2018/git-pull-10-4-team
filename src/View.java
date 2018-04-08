@@ -1,6 +1,7 @@
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import java.awt.image.BufferedImage;
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
@@ -65,7 +66,11 @@ public class View extends JPanel {
     	startStopButton = new JButton("Stop");
     	startStopButton.setMnemonic(KeyEvent.VK_S);
     	startStopButton.setToolTipText("Click to start/stop the animation");
+
+		JLabel directionChangeLabel = new JLabel("QWAS to change direction");
+		directionChangeLabel.setForeground(Color.white);
     	buttonPanel.add(startStopButton);
+		buttonPanel.add(directionChangeLabel);
     	buttonPanel.setBackground(Color.gray);
     	buttonPanel.setFocusable(false);
     	startStopButton.setFocusable(false);
