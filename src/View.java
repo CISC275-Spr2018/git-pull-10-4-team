@@ -25,8 +25,8 @@ public class View extends JPanel {
     //should never change; otherwise would mess up Model
     final static int imageWidth = 165;
     final static int imageHeight = 165;
-    final static int frameWidth = 500;
-    final static int frameHeight = 300;
+    final static int frameWidth = 500*2;
+    final static int frameHeight = 300*2;
 
     private int imageNum;
     private HashMap<Direction, Sprite> spriteMap;
