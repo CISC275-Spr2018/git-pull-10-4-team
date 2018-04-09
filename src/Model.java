@@ -62,14 +62,14 @@ public class Model extends Rectangle{
     public void changeDirection(int e) {
     	if (!checkBounds()) {
     		String curDir = direct.getName();
-    		if(e == KeyEvent.VK_Q && !curDir.equals("NORTHWEST")) {
-    			direct.setDirection(-1, -1);
-    		} else if (e == KeyEvent.VK_W && !curDir.equals("NORTHEAST")) {
-    			direct.setDirection(1, -1);
-    		} else if (e == KeyEvent.VK_A && !curDir.equals("SOUTHWEST")) {
-    			direct.setDirection(-1, 1);
-    		} else if (e == KeyEvent.VK_S && !curDir.equals("SOUTHEAST")) {
-    			direct.setDirection(1, 1);
+    		if(e == KeyEvent.VK_UP && !curDir.equals("NORTH")) {
+    			direct.setDirection(0, -1);
+    		} else if (e == KeyEvent.VK_RIGHT && !curDir.equals("EAST")) {
+    			direct.setDirection(1, 0);
+    		} else if (e == KeyEvent.VK_LEFT && !curDir.equals("WEST")) {
+    			direct.setDirection(-1, 0);
+    		} else if (e == KeyEvent.VK_DOWN && !curDir.equals("SOUTH")) {
+    			direct.setDirection(0, 1);
     		}
     	}
     }

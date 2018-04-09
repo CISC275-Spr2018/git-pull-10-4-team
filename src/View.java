@@ -67,7 +67,7 @@ public class View extends JPanel {
     	startStopButton.setMnemonic(KeyEvent.VK_S);
     	startStopButton.setToolTipText("Click to start/stop the animation");
 
-		JLabel directionChangeLabel = new JLabel("QWAS to change direction");
+		JLabel directionChangeLabel = new JLabel("Arrow keys to change direction");
 		directionChangeLabel.setForeground(Color.white);
     	buttonPanel.add(startStopButton);
 		buttonPanel.add(directionChangeLabel);
