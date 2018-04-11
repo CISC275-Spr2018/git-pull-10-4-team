@@ -3,6 +3,7 @@ import java.lang.IllegalArgumentException;
 public class Direction {
     private int vertical;
     private int horizontal;
+    private boolean jumping = false; // Are we jumping?
 
     public Direction(){
         this(1,1);
@@ -60,5 +61,18 @@ public class Direction {
         }
 
         return name;
+    }
+    
+    // Jump action
+    public void jump() {
+    	if (jumping) {
+    		jumping = false;
+    	} else {
+    	jumping = true;
+    	}
+    }
+    
+    public boolean isJumping() {
+    	return jumping;
     }
 }
