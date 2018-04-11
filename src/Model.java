@@ -30,8 +30,10 @@ public class Model extends Rectangle{
 
     public void updateLocationAndDirection(){
         //increment the image's location
-        translate(direct.getHorizontalSign() * dx,
-                  direct.getVerticalSign() * dy);
+        if(!direct.isFiring()) {
+            translate(direct.getHorizontalSign() * dx,
+                    direct.getVerticalSign() * dy);
+        }
 
         //and check whether we're out of bounds
         bounceOffWalls();
@@ -58,7 +60,7 @@ public class Model extends Rectangle{
     			(! bounds.contains(getCenterX(), getMinY())|| ! bounds.contains(getCenterX(), getMaxY()));
     }
     
-    // How to handle key presses
+    // How to handle directions
     public void changeDirection(int e) {
     	if (!checkBounds()) {
     		String curDir = direct.getName();
@@ -82,5 +84,15 @@ public class Model extends Rectangle{
     		} else if (e == KeyEvent.VK_S && !curDir.equals("SOUTHEAST")) {
     			direct.setDirection(1, 1);}
     	}
+    }
+    
+    // How to handle actions
+    public void doAction(int e) {
+    	if (e == KeyEvent.VK_J) {
+    		direct.jump();
+    	}else if(e == KeyEvent.VK_F){
+    	    System.out.println("Fire");
+    	    direct.fire();
+        }
     }
 }

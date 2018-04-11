@@ -18,6 +18,7 @@ public class Controller implements ActionListener{
 		model = new Model(view.getWidth(), view.getHeight(), View.getImageWidth(), View.getImageHeight());
 		view.setButtonListener(this); //add this as a listener to the button in view
 		view.setKeyListener(new DirectionKeyListener());
+		view.setKeyListener(new ActionKeyListener());
 
 		initTimer();
 	}
@@ -93,6 +94,37 @@ public class Controller implements ActionListener{
         @Override
         public void keyTyped(KeyEvent e) {
         }
+	}
+	
+	// a key listener for actions such as jump and fire
+	private class ActionKeyListener implements KeyListener{
+		boolean pressed = false;
+		int currentKey;
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if(!pressed && updater.isRunning()) {
+                pressed = true;
+                currentKey = e.getKeyCode();
+                model.doAction(currentKey);
+			}
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			if (e.getKeyCode() == currentKey){
+                pressed = false;
+            }
+			
+		}
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+			
+			
+		}
+		
+		
 	}
 
 	

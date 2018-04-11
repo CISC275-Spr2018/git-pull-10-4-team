@@ -106,8 +106,8 @@ public class View extends JPanel {
     }
 
     public void updateDirection(Direction direct) {
-        curSprite = Sprite.getSprite(direct);
 
+        curSprite = Sprite.getSprite(direct);
         frame.repaint();
     }
 
