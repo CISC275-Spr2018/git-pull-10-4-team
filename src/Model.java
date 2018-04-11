@@ -64,23 +64,23 @@ public class Model extends Rectangle {
 		if (!checkBounds()) {
 			String curDir = direct.getName();
 			// Orthogonal Movement
-			if (e == KeyEvent.VK_E && !curDir.equals("NORTH")) {
+			if (e == KeyEvent.VK_UP && !curDir.equals("NORTH")) {
 				direct.setDirection(0, -1);
-			} else if (e == KeyEvent.VK_F && !curDir.equals("EAST")) {
+			} else if (e == KeyEvent.VK_RIGHT && !curDir.equals("EAST")) {
 				direct.setDirection(1, 0);
-			} else if (e == KeyEvent.VK_S && !curDir.equals("WEST")) {
+			} else if (e == KeyEvent.VK_LEFT && !curDir.equals("WEST")) {
 				direct.setDirection(-1, 0);
-			} else if (e == KeyEvent.VK_D && !curDir.equals("SOUTH")) {
+			} else if (e == KeyEvent.VK_DOWN && !curDir.equals("SOUTH")) {
 				direct.setDirection(0, 1);
 				
 				// Diagonal Movement
-			} else if (e == KeyEvent.VK_W && !curDir.equals("NORTHWEST")) {
+			} else if (e == KeyEvent.VK_Q && !curDir.equals("NORTHWEST")) {
 				direct.setDirection(-1, -1);
-			} else if (e == KeyEvent.VK_R && !curDir.equals("NORTHEAST")) {
+			} else if (e == KeyEvent.VK_W && !curDir.equals("NORTHEAST")) {
 				direct.setDirection(1, -1);
 			} else if (e == KeyEvent.VK_A && !curDir.equals("SOUTHWEST")) {
 				direct.setDirection(-1, 1);
-			} else if (e == KeyEvent.VK_G && !curDir.equals("SOUTHEAST")) {
+			} else if (e == KeyEvent.VK_S && !curDir.equals("SOUTHEAST")) {
 				direct.setDirection(1, 1);
 			}
 		}
@@ -88,9 +88,9 @@ public class Model extends Rectangle {
 	
 	// How to handle actions
 	public void doAction(int e) {
-		if (e == KeyEvent.VK_SPACE && !direct.isJumping()) {
+		if (e == KeyEvent.VK_J && !direct.isJumping()) {
 			direct.jump();
-		} else if (e == KeyEvent.VK_Z) {
+		} else if (e == KeyEvent.VK_F) {
 			System.out.println("Fire");
 			direct.fire();
 		}
