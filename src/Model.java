@@ -88,7 +88,7 @@ public class Model extends Rectangle{
     
     // How to handle actions
     public void doAction(int e) {
-    	if (e == KeyEvent.VK_J) {
+    	if (e == KeyEvent.VK_J && !direct.isJumping()) {
     		direct.jump();
     	}else if(e == KeyEvent.VK_F){
     	    System.out.println("Fire");
