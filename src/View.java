@@ -28,9 +28,11 @@ public class View extends JPanel {
     final static int frameWidth = 500*2;
     final static int frameHeight = 300*2;
 
-    private int imageNum;
+    private int imageNum = 0;
     private HashMap<Direction, Sprite> spriteMap;
     private JFrame frame;
+    
+    private int jumpImageFrame = -1; // -1 means we are not jumping, so there are no jump image frames
 
     //cached from last update call
     private int curX;
@@ -101,13 +103,25 @@ public class View extends JPanel {
         curX = (int) x;
         curY = (int) y;
 
-        frame.repaint();
         imageNum = (imageNum + 1) % curSprite.getNumImages();
+        
+        frame.repaint();
     }
 
     public void updateDirection(Direction direct) {
-
         curSprite = Sprite.getSprite(direct);
+        if(direct.isJumping() && jumpImageFrame == -1) { // If this is the start of the jump animation, load the first frame
+        	imageNum = 0;
+        }
+        
+        if (direct.isJumping()) {	// If we're jumping, keep track of the jump frames and stop jumping when the animation is over
+        	jumpImageFrame++;
+        	if (jumpImageFrame == curSprite.getNumImages() - 1) {
+        		direct.jump();
+        		jumpImageFrame = -1;
+        	}
+        }
+        
         frame.repaint();
     }
 
