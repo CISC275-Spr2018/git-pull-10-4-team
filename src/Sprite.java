@@ -12,6 +12,7 @@ public enum Sprite {
     ORC_FORWARD_SOUTHWEST,
     ORC_FORWARD_WEST,
     ORC_FORWARD_NORTHWEST,
+
 	ORC_JUMP_NORTH,
     ORC_JUMP_NORTHEAST,
     ORC_JUMP_EAST,
@@ -19,7 +20,16 @@ public enum Sprite {
     ORC_JUMP_SOUTH,
     ORC_JUMP_SOUTHWEST,
     ORC_JUMP_WEST,
-    ORC_JUMP_NORTHWEST;
+    ORC_JUMP_NORTHWEST,
+
+    ORC_FIRE_NORTH,
+    ORC_FIRE_NORTHEAST,
+    ORC_FIRE_EAST,
+    ORC_FIRE_SOUTHEAST,
+    ORC_FIRE_SOUTH,
+    ORC_FIRE_SOUTHWEST,
+    ORC_FIRE_WEST,
+    ORC_FIRE_NORTHWEST;
 	
 
     BufferedImage[] pics;
@@ -29,6 +39,7 @@ public enum Sprite {
     final static String IMAGE_TYPE = ".png";
     
     final static String JUMP_PREFIX = "ORC_JUMP_";
+    final static String FIRE_PREFIX = "ORC_FIRE_";
 
     final static int frameWidth = 165;
     final static int frameHeight = 165;
@@ -66,7 +77,9 @@ public enum Sprite {
     	String name;
     	if (direct.isJumping()) {
     		name = JUMP_PREFIX + direct.getName();
-    	} else {
+    	}else if (direct.isFiring()){
+            name = FIRE_PREFIX+direct.getName();
+        }else{
     		name = PREFIX + direct.getName();
     	}
         return Sprite.valueOf(name.toUpperCase());

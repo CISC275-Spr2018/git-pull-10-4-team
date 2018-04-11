@@ -4,6 +4,7 @@ public class Direction {
     private int vertical;
     private int horizontal;
     private boolean jumping = false; // Are we jumping?
+    private boolean firing = false;
 
     public Direction(){
         this(1,1);
@@ -65,11 +66,15 @@ public class Direction {
     
     // Jump action
     public void jump() {
-    	if (jumping) {
-    		jumping = false;
-    	} else {
-    	jumping = true;
-    	}
+    	jumping = !jumping;
+    }
+
+    public void fire(){
+        firing = !firing;
+    }
+
+    public boolean isFiring(){
+        return firing;
     }
     
     public boolean isJumping() {

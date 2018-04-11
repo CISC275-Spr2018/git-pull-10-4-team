@@ -30,8 +30,10 @@ public class Model extends Rectangle{
 
     public void updateLocationAndDirection(){
         //increment the image's location
-        translate(direct.getHorizontalSign() * dx,
-                  direct.getVerticalSign() * dy);
+        if(!direct.isFiring()) {
+            translate(direct.getHorizontalSign() * dx,
+                    direct.getVerticalSign() * dy);
+        }
 
         //and check whether we're out of bounds
         bounceOffWalls();
@@ -88,6 +90,9 @@ public class Model extends Rectangle{
     public void doAction(int e) {
     	if (e == KeyEvent.VK_J) {
     		direct.jump();
-    	} 
+    	}else if(e == KeyEvent.VK_F){
+    	    System.out.println("Fire");
+    	    direct.fire();
+        }
     }
 }
