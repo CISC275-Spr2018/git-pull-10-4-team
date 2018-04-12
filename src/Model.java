@@ -62,26 +62,34 @@ public class Model extends Rectangle {
 	// How to handle directions
 	public void changeDirection(int e) {
 		if (!checkBounds()) {
-			String curDir = direct.getName();
-			// Orthogonal Movement
-			if (e == KeyEvent.VK_UP && !curDir.equals("NORTH")) {
+			switch (e){
+				// Orthogonal Movement
+				case KeyEvent.VK_UP:
 				direct.setDirection(0, -1);
-			} else if (e == KeyEvent.VK_RIGHT && !curDir.equals("EAST")) {
+				break;
+				case KeyEvent.VK_RIGHT:
 				direct.setDirection(1, 0);
-			} else if (e == KeyEvent.VK_LEFT && !curDir.equals("WEST")) {
+				break;
+				case KeyEvent.VK_LEFT:
 				direct.setDirection(-1, 0);
-			} else if (e == KeyEvent.VK_DOWN && !curDir.equals("SOUTH")) {
+				break;
+				case KeyEvent.VK_DOWN:
 				direct.setDirection(0, 1);
+				break;
 				
 				// Diagonal Movement
-			} else if (e == KeyEvent.VK_Q && !curDir.equals("NORTHWEST")) {
+				case KeyEvent.VK_Q:
 				direct.setDirection(-1, -1);
-			} else if (e == KeyEvent.VK_W && !curDir.equals("NORTHEAST")) {
+				break;
+				case KeyEvent.VK_W:
 				direct.setDirection(1, -1);
-			} else if (e == KeyEvent.VK_A && !curDir.equals("SOUTHWEST")) {
+				break;
+				case KeyEvent.VK_A:
 				direct.setDirection(-1, 1);
-			} else if (e == KeyEvent.VK_S && !curDir.equals("SOUTHEAST")) {
+				break;
+				case KeyEvent.VK_S:
 				direct.setDirection(1, 1);
+				break;
 			}
 		}
 	}
